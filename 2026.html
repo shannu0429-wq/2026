@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>New Year Greeting Card 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#23395d,#0b2545,#020817,#3b2f6b);
+    background-size:400% 400%;
+    animation:bgMove 18s ease infinite;
+    color:white;
+    position:relative;
+  }
+
+  @keyframes bgMove{
+    0%{background-position:0% 0%;}
+    50%{background-position:100% 100%;}
+    100%{background-position:0% 0%;}
+  }
+
+  .circle-bg{
+    position:absolute;
+    border-radius:50%;
+    opacity:0.25;
+    background:#70e1f5;
+    width:40px;
+    height:40px;
+    animation:floatUp linear infinite;
+    z-index:0;
+  }
+
+  @keyframes floatUp{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-80px);}
+  }
+
+  #fireworks-layer{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+
+  .firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    pointer-events:none;
+    opacity:1;
+  }
+
+  @keyframes fireworkUp{
+    0%{transform:translate(0,0); opacity:1;}
+    80%{transform:translate(0,var(--y)); opacity:1;}
+    100%{transform:translate(0,var(--y)); opacity:0;}
+  }
+
+  @keyframes fireworkBlast{
+    0%{transform:scale(0); opacity:1;}
+    50%{transform:scale(1.5); opacity:1;}
+    100%{transform:scale(0); opacity:0;}
+  }
+
+  .card{
+    position:relative;
+    max-width:500px;
+    width:90vw;
+    padding:24px 18px 36px;
+    border-radius:18px;
+    background:rgba(3,8,23,0.92);
+    box-shadow:0 18px 35px rgba(0,0,0,0.6);
+    border:1px solid rgba(255,255,255,0.08);
+    overflow:hidden;
+    z-index:2;
+  }
+
+  .bg-orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(40px);
+    opacity:0.35;
+    animation:orbMove 18s ease-in-out infinite alternate;
+    z-index:0;
+  }
+  .bg-orb:nth-child(1){ width:220px;height:220px; background:#ff7eb3; top:-40px; left:-40px; }
+  .bg-orb:nth-child(2){ width:240px;height:240px; background:#70e1f5; bottom:-60px; right:-40px; animation-delay:3s; }
+  .bg-orb:nth-child(3){ width:200px;height:200px; background:#ffd86f; top:50%; left:60%; transform:translate(-50%,-50%); animation-delay:6s; }
+
+  @keyframes orbMove{
+    0%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(16px,-24px) scale(1.08);}
+    100%{transform:translate(-12px,18px) scale(1.04);}
+  }
+
+  .container{ text-align:center; position:relative; z-index:3; }
+  h1{ margin-bottom:8px; font-size:24px; }
+  .subtitle{ font-size:13px; opacity:0.85; margin-bottom:10px; }
+
+  /* input with floating label and underline animation */
+  .name-row{
+    margin-bottom:18px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    font-size:14px;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+  .name-wrapper{
+    position:relative;
+    width:210px;
+    max-width:70vw;
+  }
+  .name-wrapper input{
+    width:100%;
+    padding:8px 4px 4px;
+    border:none;
+    border-bottom:2px solid rgba(255,255,255,0.4);
+    background:transparent;
+    color:#fff;
+    font-size:14px;
+    outline:none;
+  }
+  .name-wrapper label{
+    position:absolute;
+    left:4px;
+    top:8px;
+    color:rgba(255,255,255,0.7);
+    font-size:13px;
+    pointer-events:none;
+    transition:0.2s ease;
+  }
+  .name-wrapper input:focus + label,
+  .name-wrapper input:not(:placeholder-shown) + label{
+    top:-10px;
+    font-size:11px;
+    color:#ffdd57;
+  }
+  .name-wrapper .underline{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:2px;
+    background:linear-gradient(90deg,#ff7eb3,#ffdd57,#70e1f5);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.25s ease-out;
+  }
+  .name-wrapper input:focus ~ .underline{
+    transform:scaleX(1);
+  }
+
+  .envelope{
+    width:240px;
+    max-width:80vw;
+    height:155px;
+    background:#e6b3ff;
+    position:relative;
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    margin:0 auto;
+    box-shadow:0 10px 25px rgba(0,0,0,0.35);
+    transition:transform 0.3s, opacity 0.8s;
+    z-index:4;
+  }
+
+  .envelope:hover{ transform:translateY(-4px) scale(1.02); }
+
+  .flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:120px solid transparent;
+    border-right:120px solid transparent;
+    border-bottom:80px solid #f3d1ff;
+    transform-origin:top;
+    transition:transform 0.8s;
+    z-index:5;
+  }
+
+  .letter{
+    position:absolute;
+    width:205px;
+    max-width:72vw;
+    height:auto;
+    min-height:125px;
+    background:white;
+    top:16px;
+    left:50%;
+    transform:translate(-50%,60px);
+    border-radius:8px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#333;
+    font-size:13px;
+    text-align:center;
+    padding:8px;
+    opacity:0;
+    transition:transform 0.8s,opacity 0.8s;
+    overflow:hidden;
+    z-index:5;
+  }
+
+  .envelope.open .flap{ transform:rotateX(180deg); }
+  .envelope.open .letter{
+    transform:translate(-50%,-5px);
+    opacity:1;
+  }
+
+  .letter-start{
+    font-weight:bold;
+    font-size:16px;
+    margin-bottom:6px;
+  }
+
+  .letter-wish{
+    font-size:16px;
+    line-height:1.4;
+    display:none;
+  }
+
+  .glow-text{
+    color:#ffbb33;
+    text-shadow:0 0 10px #ffdd57,0 0 20px #ffdd57,0 0 30px #ffdd57;
+    animation:glowAnim 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowAnim{
+    0%{text-shadow:0 0 5px #ffdd57;}
+    50%{text-shadow:0 0 15px #ffdd57,0 0 25px #ffdd57;}
+    100%{text-shadow:0 0 5px #ffdd57;}
+  }
+
+  .plane{
+    position:absolute;
+    left:50%;
+    top:55%;
+    transform:translate(-50%,-50%);
+    font-size:28px;
+    opacity:0;
+    pointer-events:none;
+    z-index:6;
+  }
+
+  .plane.fly{ animation:planeFly 2.1s ease-in-out forwards; }
+
+  @keyframes planeFly{
+    0%{transform:translate(-50%,-50%) scale(1) rotate(0deg); opacity:1;}
+    40%{transform:translate(40%,-110%) scale(1.1) rotate(-10deg);}
+    80%{transform:translate(130%,-170%) scale(1.15) rotate(-5deg);}
+    100%{transform:translate(190%,-220%) scale(0.9) rotate(-5deg); opacity:0;}
+  }
+
+  #welcome2026{
+    font-size:26px;
+    font-weight:bold;
+    color:#ffdd57;
+    text-shadow:0 0 20px #ffdd57,0 0 40px #ffdd57,0 0 60px #ffdd57;
+    opacity:0;
+    margin-top:22px;
+    white-space:nowrap;
+    transition:opacity 1s ease-in-out;
+    pointer-events:none;
+    text-align:center;
+  }
+
+  #personalWelcome{
+    display:none;
+    margin-top:8px;
+    font-size:15px;
+    color:#fff3b0;
+    line-height:1.4;
+  }
+
+  #happiness-below{
+    display:none;
+    margin-top:10px;
+    font-size:14px;
+    color:#fff3b0;
+    line-height:1.4;
+  }
+
+  /* background watermark bottom-right */
+  .page-credit{
+    position:fixed;
+    bottom:8px;
+    right:12px;
+    font-size:11px;
+    color:rgba(255,255,255,0.6);
+    z-index:1;
+  }
+
+  /* extra tweaks for small phones */
+  @media (max-width:480px){
+    h1{font-size:20px;}
+    .subtitle{font-size:12px;}
+    .name-row{font-size:13px;}
+    .letter-start{font-size:15px;}
+    .letter-wish{font-size:14px;}
+    #welcome2026{font-size:22px;}
+    #personalWelcome,#happiness-below{font-size:13px;}
+    .plane{font-size:24px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="circle-container"></div>
+<div id="fireworks-layer"></div>
+
+<div class="card">
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+
+  <div class="container">
+    <h1>New Year Greeting 🎇</h1>
+    <div class="subtitle" id="subtitleText">Enter your name and tap the mail.</div>
+
+    <div class="name-row" id="nameRow">
+      <span>Your name:</span>
+      <div class="name-wrapper">
+        <input type="text" id="userName" placeholder=" " required>
+        <label for="userName">Type your name here</label>
+        <div class="underline"></div>
+      </div>
+    </div>
+
+    <div class="envelope" id="envelope">
+      <div class="flap"></div>
+      <div class="letter" id="letter">
+        <div class="letter-start" id="letterStart">A special wish is ready...</div>
+        <div class="letter-wish glow-text" id="letterWish">
+          🎉 Dear friend, may this New Year bring you happiness, peace, and bright new beginnings! 🎉
+        </div>
+      </div>
+      <div class="plane" id="plane">✈️</div>
+    </div>
+
+    <div id="welcome2026">Welcome to 2026!</div>
+    <div id="personalWelcome"></div>
+
+    <div id="happiness-below">
+      🌟 Smile more, laugh louder, and cherish every moment!<br>
+      🌟 Surround yourself with positive vibes and loving people!<br>
+      🌟 Let every day of 2026 be a little brighter than the last!
+    </div>
+  </div>
+</div>
+
+<span class="page-credit">@made by shannu</span>
+
+<script>
+const envelope = document.getElementById("envelope");
+const plane = document.getElementById("plane");
+const letterStart = document.getElementById("letterStart");
+const letterWish = document.getElementById("letterWish");
+const welcome = document.getElementById("welcome2026");
+const happinessBelow = document.getElementById("happiness-below");
+const personalWelcome = document.getElementById("personalWelcome");
+const nameRow = document.getElementById("nameRow");
+const subtitleText = document.getElementById("subtitleText");
+const fireworksLayer = document.getElementById("fireworks-layer");
+const circleContainer = document.getElementById("circle-container");
+const userNameInput = document.getElementById("userName");
+
+// floating circles
+for(let i=0;i<18;i++){
+  const circle = document.createElement('div');
+  circle.className = 'circle-bg';
+  const size = Math.random()*40 + 20;
+  circle.style.width = size+'px';
+  circle.style.height = size+'px';
+  circle.style.left = Math.random()*window.innerWidth+'px';
+  circle.style.animationDuration = (12 + Math.random()*12)+'s';
+  circle.style.background = `rgba(255,255,255,${0.15 + Math.random()*0.25})`;
+  circleContainer.appendChild(circle);
+}
+
+let sent = false;
+
+envelope.addEventListener("click", function(){
+  if(sent) return;
+
+  let name = userNameInput.value.trim();
+  if(!name){
+    alert("Please enter your name first 😊");
+    userNameInput.focus();
+    return;
+  }
+
+  letterWish.textContent =
+    `🎉 Dear ${name}, may this New Year bring you happiness, peace, and bright new beginnings! 🎉`;
+
+  subtitleText.style.display = "none";
+  nameRow.style.display = "none";
+
+  envelope.classList.add("open");
+  plane.classList.add("fly");
+
+  setTimeout(() => {
+    envelope.style.opacity = 0.15;
+    plane.style.display = "none";
+    welcome.style.opacity = 1;
+
+    personalWelcome.textContent =
+      `Hey ${name}, Happy New Year! 🎉 Hope this year brings you lots of fun, laughter, and amazing memories!`;
+    personalWelcome.style.display = "block";
+
+    letterStart.style.display = "none";
+    letterWish.style.display = "block";
+    happinessBelow.style.display = "block";
+
+    sent = true;
+    startFireworks();
+  }, 2100);
+});
+
+function startFireworks(){
+  // more crackers: two bursts per interval, faster interval
+  setInterval(() => {
+    createFirework();
+    createFirework();
+  }, 280);
+}
+
+function createFirework(){
+  const count = 22; // more particles per burst
+  const baseX = Math.random() * window.innerWidth;
+  const baseY = window.innerHeight - 40;
+
+  for(let i=0; i<count; i++){
+    const fw = document.createElement('div');
+    fw.className = 'firework';
+    fw.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    fw.style.left = baseX + 'px';
+    fw.style.top = baseY + 'px';
+    const y = (-Math.random()*260 - 80) + 'px';
+    fw.style.setProperty('--y', y);
+    fw.style.animation = `fireworkUp 0.8s ease-out forwards, fireworkBlast 0.8s ease-out forwards`;
+    fireworksLayer.appendChild(fw);
+    setTimeout(()=> fw.remove(), 800);
+  }
+}
+</script>
+
+</body>
+</html>
